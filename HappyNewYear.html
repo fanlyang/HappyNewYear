@@ -139,9 +139,12 @@ function createHeart() {
 setInterval(() => {
     for(let i = 0; i < 5; i++) {
         createStar();
+    }
+    for(let i = 0; i < 1; i++) {   // only 1 heart per interval
         createHeart();
     }
 }, 200);
+
 </script>
 
 </body>
