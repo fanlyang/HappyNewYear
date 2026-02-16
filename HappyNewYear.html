@@ -22,9 +22,10 @@
 
   .particle {
     position: absolute;
-    font-size: 20px;
     user-select: none;
     pointer-events: none;
+    font-size: 20px;
+    text-shadow: 0 0 5px white;
   }
 
   #message {
@@ -32,7 +33,7 @@
     top: 85%;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 30px;
+    font-size: 36px;
     font-weight: bold;
     color: gold;
     text-shadow: 2px 2px 5px red;
@@ -47,24 +48,22 @@
 <div id="firework"></div>
 <div id="message">
   Meine Liebe Jian,<br>
-  ich wünsche Ihnen ein frohes und erfolgreiches chinesisches Neujahr! 🧧🎉
+  Ich wünsche Ihnen ein frohes und erfolgreiches chinesisches Neujahr 2026! 🧧🎉
 </div>
 
 <script>
 const fireworkArea = document.getElementById("firework");
-const colors = ["#FF0000","#FFD700","#00BFFF","#FF69B4","#00FF7F"];
+const colors = ["#FF0000","#FFD700","#00BFFF","#FF69B4","#00FF7F","#FF8C00","#ADFF2F","#00FFFF"];
 
-// Function to launch one firework
+// Launch one firework
 function launchFirework() {
-    // Rocket position
     const rocketX = Math.random() * window.innerWidth;
     const rocketY = window.innerHeight;
-    const explosionY = 100 + Math.random() * 200; // height to explode
+    const explosionY = 100 + Math.random() * 200;
 
-    // Rocket ascent
     const rocket = document.createElement("div");
     rocket.className = "particle";
-    rocket.textContent = "•"; // small dot for rocket
+    rocket.textContent = "•";
     rocket.style.color = "#FFFFFF";
     rocket.style.left = rocketX + "px";
     rocket.style.top = rocketY + "px";
@@ -72,19 +71,19 @@ function launchFirework() {
 
     let top = rocketY;
     const interval = setInterval(() => {
-        top -= 8; // rocket speed
+        top -= 10; // faster rocket
         rocket.style.top = top + "px";
         if(top <= explosionY){
             clearInterval(interval);
             fireworkArea.removeChild(rocket);
             explode(rocketX, top);
         }
-    }, 30);
+    }, 20);
 }
 
-// Function to create explosion
+// Explosion function
 function explode(x, y) {
-    const numParticles = 20 + Math.floor(Math.random() * 10);
+    const numParticles = 60 + Math.floor(Math.random() * 30); // bigger explosion
     for(let i = 0; i < numParticles; i++){
         const particle = document.createElement("div");
         particle.className = "particle";
@@ -92,11 +91,12 @@ function explode(x, y) {
         particle.style.color = colors[Math.floor(Math.random()*colors.length)];
         particle.style.left = x + "px";
         particle.style.top = y + "px";
+        particle.style.fontSize = (10 + Math.random() * 25) + "px"; // random size
+        particle.style.opacity = 1;
         fireworkArea.appendChild(particle);
 
-        // Random direction
         const angle = Math.random() * 2 * Math.PI;
-        const speed = 2 + Math.random() * 4;
+        const speed = 4 + Math.random() * 6; // faster spread
         let posX = x;
         let posY = y;
 
@@ -110,13 +110,12 @@ function explode(x, y) {
                 fireworkArea.removeChild(particle);
                 clearInterval(move);
             }
-        }, 30);
+        }, 20);
     }
 }
 
 // Launch fireworks repeatedly
-setInterval(launchFirework, 1000);
-
+setInterval(launchFirework, 700); // launch more often
 </script>
 
 </body>
