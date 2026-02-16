@@ -37,11 +37,19 @@
     pointer-events: none;
   }
 
-  #message {
-    font-size: 24px;
-    margin-top: 20px;
-    color: #FFD700; /* gold */
-  }
+ #message {
+    position: absolute;        /* overlay on page */
+    top: 80%;                  /* adjust vertical position */
+    left: 50%;                 /* center horizontally */
+    transform: translateX(-50%);
+    font-size: 36px;            /* bigger text */
+    font-weight: bold;          /* bold text */
+    color: #FFD700;             /* gold */
+    text-shadow: 2px 2px 5px #FF0000; /* optional: red shadow for depth */
+    z-index: 15;                /* above fireworks */
+    text-align: center;         /* center lines */
+}
+
 </style>
 </head>
 <body>
